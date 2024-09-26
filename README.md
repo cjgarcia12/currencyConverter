@@ -70,3 +70,53 @@ The application includes comprehensive error handling to provide feedback to the
 
 This Currency Converter Application demonstrates the integration of frontend and backend technologies to create a functional web application. It covers essential aspects such as API consumption, data persistence, and user interaction, providing a comprehensive learning experience.
 
+
+## Running the Application with Docker
+
+This application can be run using Docker. Follow the steps below to build and run the Docker container.
+
+### Prerequisites
+
+- Ensure you have [Docker](https://www.docker.com/get-started) installed on your machine.
+- Make sure to have your API key ready to be added to the `.env` file.
+
+### Step 1: Create a `.env` File
+
+Create a `.env` file in the root of your project directory and add your API key:
+
+```env
+CURRENCY_API_KEY=your_api_key_here
+```
+
+### Step 2: Build the Docker Image
+
+In your terminal, navigate to the root of your project directory and run the following command to build the Docker image:
+
+```bash
+docker-compose build
+```
+
+### Step 3: Run the Docker Container
+
+After the image is built, you can run the Docker container with the following command:
+
+```bash
+docker-compose up
+```
+
+### Step 4: Access the Application
+
+Once the container is running, you can access the application in your web browser at:
+
+```
+http://localhost:3000
+```
+
+### Step 5: Stopping the Application
+
+To stop the application, press `Ctrl + C` in the terminal where the Docker container is running.
+
+### Additional Notes
+
+- Ensure that your `.dockerignore` file is set up to exclude unnecessary files from the Docker image.
+- If you make changes to your application code, you may need to rebuild the Docker image using the `docker-compose build` command again.
