@@ -11,29 +11,36 @@ const favorites = document.getElementById('favorites');
 
 // list all keys from api fetch
 const listCurrencies = () => {
-    fetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_IH2kLfdZeklM5wzTPVsnvBlKqdXN4t2PyLPUVziN')
-        .then(response => {
-            if (!response.ok) {
-                if (response.status === 429) {
-                    throw new Error('API rate limit reached. Please try again later.');
-                } else {
-                    throw new Error('Failed to fetch currency data.');
-                }
-            }
-            return response.json();
-        })
-        .then(result => {
-            const currencies = Object.keys(result.data);
-            currencies.forEach((el) => {
-                let baseOption = `<option value="${el}">${el}</option>`;
-                let targetOption = `<option value="${el}">${el}</option>`;
-                baseCurrency.innerHTML += baseOption;
-                targetCurrency.innerHTML += targetOption;
-            });
+    fetch('/api/key')
+        .then(response => response.json())
+        .then(data => {
+            const apiKey = data.apiKey;
+            fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}`)
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 429) {
+                            throw new Error('API rate limit reached. Please try again later.');
+                        } else {
+                            throw new Error('Failed to fetch currency data.');
+                        }
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    const currencies = Object.keys(result.data);
+                    currencies.forEach((el) => {
+                        let baseOption = `<option value="${el}">${el}</option>`;
+                        let targetOption = `<option value="${el}">${el}</option>`;
+                        baseCurrency.innerHTML += baseOption;
+                        targetCurrency.innerHTML += targetOption;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching currency data:', error);
+                });
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert(error.message);
+            console.error('Error fetching API key:', error);
         });
 }
 

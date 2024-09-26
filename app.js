@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const sequelize = require('./config/database');
 const User = require('./models/User');
@@ -40,6 +42,10 @@ app.get('/api/favorites', (req, res) => {
         res.status(500).send('Error fetching favorites');
       })
 })
+
+app.get('/api/key', (req, res) => {
+  res.json({ apiKey: process.env.CURRENCY_API_KEY });
+});
 
 // Sync database and start the server
 const startServer = async () => {

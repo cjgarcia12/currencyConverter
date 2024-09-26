@@ -1,0 +1,22 @@
+# Node modules
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Docker files
+Dockerfile
+docker-compose.yml
+
+# Build artifacts
+dist
+build
+
+# Miscellaneous
+.DS_Store
+*.swp
